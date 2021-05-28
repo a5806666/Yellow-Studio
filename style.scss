@@ -1,0 +1,362 @@
+//顏色定義
+$color_blue: #282f44;
+$color_brown: #E6AF2E;
+$color_yellow: #f5d061;
+$color_white: #ececec;
+
+//一些常用的mixin
+@mixin ab_center{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+}
+@mixin size($w,$h){
+    width: $w;
+    height: $h;
+}
+
+*{
+    font-family: 'Oswald', sans-serif, '微軟正黑體';
+    // border: solid 1px gray;
+    // #section_service, #section_about, #header_index, .navbar.navbar-expand-sm, #section_works{
+    //     display: none;
+    // }
+}
+
+html,body{
+    overflow-x: hidden;
+    font-size: 16px;
+}
+
+// 導覽列
+.navbar.navbar-expand-sm.fixed-top{
+    transition: 0.5s;
+    border-bottom: solid 1px white;
+    a{
+        transition: 0.5s;
+    }
+    &.navbar-dark{
+        .navbar-brand{
+            &:hover{
+                color: #777;
+            }
+        }
+        .nav-link{
+            color: white;
+            &:hover{
+                color: #777;
+            }
+        }
+    }
+};
+
+// 首頁
+header{
+    position: relative;
+    background-color: $color_blue;
+    text-align: center;
+    // 首頁bottom_img由下往上
+    @keyframes upin{
+        0% { bottom: -100px; }
+        100% { bottom: 0px; }
+    }
+    @keyframes up_dom{
+        0% { transform: translate(-25px,-10px); }
+        50% { transform: translate(-25px,0px); }
+        100% { transform: translate(-25px,-10px); }
+    }
+    .icon{
+        width: 80%;
+        max-width: 250px;
+        padding: 250px 0px;
+    }
+    .marginbottom{
+        position: absolute;
+        width: 95%;
+        bottom: 0px;
+        right: -20px;
+        animation: upin 2s both;
+    }
+    .explore{
+        color: $color_yellow;
+        font-size: 16px;
+        @include ab_center;
+        animation: up_dom 3s infinite;
+        top: 80%;
+        opacity: 0;
+        transition: 0.5s;
+        &::after{
+            display: block;
+            content: "V";
+            transform: scaleX(1.2) scaleY(0.5);
+        }
+        &.at_top{
+            opacity: 1;
+        }
+    }
+}
+
+// About
+section{
+    padding: 60px 0px;
+    position: relative;
+}
+#section_about{
+    background-color: $color_brown;
+    .container{
+        transform: rotate(15deg)scale(0.9);
+    }
+    .marginbottom{
+        position: absolute;
+        width: 60%;
+        top: calc(100% - 2px);
+        z-index: 5;
+    }
+    .cat{
+        width: 30%;
+        max-width: 300px;
+        position: absolute;
+        bottom: -2px;
+        right: 25px;
+    }
+    #cross{
+        position: absolute;
+        z-index: 5;
+        //讓滑鼠點擊會穿過
+        pointer-events: none;        
+        &::before,&::after{
+            content: "";
+            display: block;
+            width: 60px;
+            height: 15px;
+            background: #fff;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%) rotate(45deg);
+        }
+        &::after{
+            transform: translate(-50%,-50%) rotate(136deg)
+        }
+    }
+    .row{
+        height: 150px;
+        color:black;
+        .r1text{
+            font-size: 80px;
+            transition: 0.1s;
+            @media screen and (max-width: 1200px){
+                font-size: 70px;
+            }
+            @media screen and (max-width: 1000px){
+                font-size: 50px;
+            }
+        }
+        .r2text{
+            font-size: 35px;
+            transition: 0.2s;
+            @media screen and (max-width: 1200px){
+                font-size: 25px;
+            }
+            @media screen and (max-width: 600px){
+                font-size: 20px;
+            }
+        }
+        .r3text{
+            font-size: 50px;
+            text-align: right;
+            transition: 0.3s;
+            @media screen and (max-width: 1200px){
+                font-size: 35px;
+                margin-top: 5px;
+            }
+            @media screen and (max-width: 600px){
+                font-size: 25px;
+                margin-top: 50px;
+            }
+        }
+        .btn_area{
+            height: 150px;
+            a{
+                @include ab_center();
+                transform: translate(-50%, -50%) rotate(10deg);
+            }
+        }
+        .tri{
+            transform: rotate(-15deg);
+        }
+        .tri1{
+            width: 350px;
+        }
+        .tri2{
+            width: 20px;
+            margin-left: 20px;
+        }
+        .tri3{
+            width: 150px;
+            margin-left: 70%;
+        }
+        .tri4{
+            width: 70px;
+        margin-left: 100%;
+        }
+        .tri5{
+            width: 80px;
+            margin-left: 100%;
+            @media screen and (max-width: 600px){
+                display:none;
+            }
+        }
+    }
+}
+
+// service
+#section_service{
+    background-color: $color_white;
+    .col-sm-4{
+        text-align: center;
+    }
+    h3{
+        color: $color_brown;
+    }
+    .icon_service{
+        width: 60%;
+    }
+}
+// works
+#section_works{
+    background-color: $color_white;
+    .marginbottom{
+        position: absolute;
+        width: 70%;
+        top: 100%;
+        right: -20px;
+        animation: upin 2s both;
+        z-index: 10;
+    }
+    .work{
+        border: solid 2px;
+        height: 300px;
+        padding-top: 80px;
+        border-radius: 200px 200px 20px 20px;
+        cursor: pointer;
+        overflow: hidden;
+        //   ＊＊讓內容物垂直置中＊＊
+        display: flex;
+        align-items: flex-end;
+        justify-content: center;
+        transition: 0.5s;
+        margin-top: 10px;
+        box-sizing: border-box;
+        padding: 5px;
+        img{
+            width: 140%;
+            height: 100%;
+            @include ab_center();
+        }
+        h5{
+            color: $color_yellow;
+            transition: 0.5s;
+            font-size: 18px;
+            opacity: 0;
+            border: solid 1px $color_brown;
+        }
+        &::before{
+            content: "";
+            display: block;
+            @include ab_center();
+            @include size(100%, 100%);
+            background-color: rgba($color_white,0.3);
+            z-index: 5;
+            transition: 0.5s;
+            opacity: 0;
+        }
+        &:hover{
+            h5{
+                opacity: 1;
+            }
+            &::before{
+                opacity: 1;
+            }
+        }
+    }
+    .texts{
+        @include ab_center();
+    }
+}
+
+// contact
+#section_contact{
+    background-color: $color_blue;
+    color: $color_white;
+    overflow: hidden;
+    .mails{
+        height: 400px;
+        .mailbody{
+            background-color: $color_white;
+            color: $color_blue;
+            padding: 20px;
+            padding-left: 40px;
+            position: absolute;
+            width: 90%;
+            transform: translateX(-30px);
+        }
+        .mailcover{
+            @include ab_center();
+            top: 70%;
+            transform: rotate(5deg) scale(2.1) translate(-50%, -50%);
+            img{
+                width: 120%;
+            }
+        }
+    }
+    input, textarea{
+        display: block;
+        background-color: transparent;
+        border: none;
+        border:solid 3px $color_blue;
+    }
+    textarea{
+        height: 140px;
+        width: 100%;
+    }
+    .cat{
+        width: 150px;
+        position: absolute;
+        bottom: 0px;
+        transition: 0.3s;
+    }
+    #cat_blue{
+        right: 240px;
+        z-index: 3;
+        @media screen and (max-width: 700px){
+            right: 160px;
+            z-index: 5;
+        }
+    }
+    #cat_grey{
+        right: 100px;
+        @media screen and (max-width: 700px){
+            z-index: 3;
+        }
+    }
+    #cat_yellow{
+        right: 170px;
+        @media screen and (max-width: 700px){
+            right: 25px;
+            z-index: 2;
+        }
+    }
+}
+
+// footer
+#footer{
+    background-color: $color_brown;
+    text-align: center;
+    .icon{
+        width: 80%;
+        max-width: 250px;
+        padding: 80px 0px;
+    }
+}
